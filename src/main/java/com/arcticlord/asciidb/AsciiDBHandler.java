@@ -1,4 +1,4 @@
-package AsciiDB;
+package com.arcticlord.asciidb;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 
 class AsciiDBHandler {
-	public String Name;
-	public String[] Columns;
-	public File FileHandler;
+	protected String Name;
+	protected String[] Columns;
+	protected File FileHandler;
 	private LinkedList<AsciiDBEntry> entries;
 
 	public AsciiDBHandler(String dbName, String[] columnNames){
@@ -44,6 +44,17 @@ class AsciiDBHandler {
 	
 	public List<AsciiDBEntry> GetEntries(){
 		return entries;
+	}
+	
+	public List<AsciiDBEntry> FindEntries(String columnName, String value){
+		int colId = GetColumnId(columnName);
+		List<AsciiDBEntry> result = new LinkedList<AsciiDBEntry>();
+		if(colId != -1){
+			for(AsciiDBEntry entry : entries)
+				if(entry.Get(colId).equals(value))
+					result.add(entry);
+		}
+		return result;
 	}
 	
 	// Throws FileNotFoundException but this method is

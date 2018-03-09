@@ -1,4 +1,4 @@
-package AsciiDB;
+package com.arcticlord.asciidb;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,13 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+
 public class AsciiDB {
-	public static final String ENTRY_SEPARATOR  = "~";
-	public static final String COLUMN_SEPARATOR = "`";
-	public static final String REGEX_REPLACE 	 = "["
-												+ ENTRY_SEPARATOR
-												+ COLUMN_SEPARATOR
-												+ "]";
+	
+	protected static final String ENTRY_SEPARATOR  = "~";
+	protected static final String COLUMN_SEPARATOR = "`";
+	protected static final String REGEX_REPLACE 	 = 
+			"[" + ENTRY_SEPARATOR + COLUMN_SEPARATOR + "]";
 	
 	private String dbFolder;	
 	private LinkedList<AsciiDBHandler> dbHandler;	
@@ -110,8 +110,13 @@ public class AsciiDB {
 		return dbHandler.get(id);
 	}
 	
-	public List<AsciiDBEntry> GetDatabase(int databaseId){
+	public List<AsciiDBEntry> GetAllEntries(int databaseId){
 		return getDBHandler(databaseId).GetEntries();
+	}
+	
+	public List<AsciiDBEntry> FindEntries(int databaseId, String columnName,
+			String value){
+		return getDBHandler(databaseId).FindEntries(columnName, value);
 	}
 	
 	public AsciiDBEntry CreateEntry(int databaseId){

@@ -1,4 +1,4 @@
-package AsciiDB;
+package com.arcticlord.asciidb;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ public class AsciiDBEntry {
 	private AsciiDBHandler handler;
 	private boolean newEntry;
 	
-	public AsciiDBEntry(AsciiDBHandler handler){
+	protected AsciiDBEntry(AsciiDBHandler handler){
 		this.handler = handler;
 		this.entry = new String[handler.Columns.length];
 		this.newEntry = true;
@@ -17,10 +17,16 @@ public class AsciiDBEntry {
 			entry[i] = "";
 	}
 	
-	public AsciiDBEntry(AsciiDBHandler model, String[] entry){
+	protected AsciiDBEntry(AsciiDBHandler model, String[] entry){
 		this.handler = model;
 		this.entry = entry;
 		this.newEntry = false;
+	}
+	
+	// for the FindEntry method of Handler
+	// garanteed to give a previously checked valid column id
+	protected String Get(int columnId){
+		return entry[columnId];
 	}
 	
 	public String Get(String columnName){
@@ -56,7 +62,7 @@ public class AsciiDBEntry {
 		}
 	}
 	
-	public String pack(){
+	protected String pack(){
 		String result = "";
 		for(int i = 0; i < entry.length - 1; i++){
 			result += entry[i] + AsciiDB.COLUMN_SEPARATOR;
