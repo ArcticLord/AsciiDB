@@ -8,7 +8,7 @@ public class AsciiDBEntry {
 	private AsciiDBHandler handler;
 	private boolean newEntry;
 	
-	protected AsciiDBEntry(AsciiDBHandler handler){
+	AsciiDBEntry(AsciiDBHandler handler){
 		this.handler = handler;
 		this.entry = new String[handler.Columns.length];
 		this.newEntry = true;
@@ -17,7 +17,7 @@ public class AsciiDBEntry {
 			entry[i] = "";
 	}
 	
-	protected AsciiDBEntry(AsciiDBHandler model, String[] entry){
+	AsciiDBEntry(AsciiDBHandler model, String[] entry){
 		this.handler = model;
 		this.entry = entry;
 		this.newEntry = false;
@@ -25,7 +25,7 @@ public class AsciiDBEntry {
 	
 	// for the FindEntry method of Handler
 	// garanteed to give a previously checked valid column id
-	protected String Get(int columnId){
+	String Get(int columnId){
 		return entry[columnId];
 	}
 	
@@ -62,7 +62,7 @@ public class AsciiDBEntry {
 		}
 	}
 	
-	protected String pack(){
+	String pack(){
 		String result = "";
 		for(int i = 0; i < entry.length - 1; i++){
 			result += entry[i] + AsciiDB.COLUMN_SEPARATOR;

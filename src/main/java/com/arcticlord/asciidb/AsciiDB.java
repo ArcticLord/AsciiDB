@@ -9,9 +9,9 @@ import java.util.List;
 
 public class AsciiDB {
 	
-	protected static final String ENTRY_SEPARATOR  = "~";
-	protected static final String COLUMN_SEPARATOR = "`";
-	protected static final String REGEX_REPLACE 	 = 
+	static final String ENTRY_SEPARATOR  = "~";
+	static final String COLUMN_SEPARATOR = "`";
+	static final String REGEX_REPLACE 	 = 
 			"[" + ENTRY_SEPARATOR + COLUMN_SEPARATOR + "]";
 	
 	private String dbFolder;	

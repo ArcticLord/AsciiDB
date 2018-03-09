@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Scanner;
 
 class AsciiDBHandler {
-	protected String Name;
-	protected String[] Columns;
-	protected File FileHandler;
+	String Name;
+	String[] Columns;
+	File FileHandler;
 	private LinkedList<AsciiDBEntry> entries;
 
-	public AsciiDBHandler(String dbName, String[] columnNames){
+	AsciiDBHandler(String dbName, String[] columnNames){
 		Name = dbName;
 		Columns = columnNames;
 		FileHandler = null;
 		entries = new LinkedList<AsciiDBEntry>();
 	}
 	
-	public int GetColumnId(String columnName){
+	int GetColumnId(String columnName){
 		for(int i = 0; i < Columns.length; i++){
 			if(columnName.equals(Columns[i]))
 				return i;
@@ -32,7 +32,7 @@ class AsciiDBHandler {
 		return -1;
 	}
 	
-	public void SaveEntry(AsciiDBEntry entry) throws IOException{
+	void SaveEntry(AsciiDBEntry entry) throws IOException{
 		// append to DB File
 		FileWriter fileWriter = new FileWriter(FileHandler, true);
 	    BufferedWriter writer = new BufferedWriter(fileWriter); 
@@ -42,11 +42,11 @@ class AsciiDBHandler {
 	    this.entries.add(entry);	    
 	}
 	
-	public List<AsciiDBEntry> GetEntries(){
+	List<AsciiDBEntry> GetEntries(){
 		return entries;
 	}
 	
-	public List<AsciiDBEntry> FindEntries(String columnName, String value){
+	List<AsciiDBEntry> FindEntries(String columnName, String value){
 		int colId = GetColumnId(columnName);
 		List<AsciiDBEntry> result = new LinkedList<AsciiDBEntry>();
 		if(colId != -1){
@@ -64,7 +64,7 @@ class AsciiDBHandler {
 	// FileNotFoundException should never happen anyway because
 	// Initialize checks existence of all Files first before
 	// calling Read.
-	public void Read() throws FileNotFoundException{			
+	void Read() throws FileNotFoundException{			
 		// use scanner with ENTRY SEPERATOR as delimiter
 		// to read each packed entry from database file
 		Scanner scanner = new Scanner(FileHandler, "UTF-8");		
@@ -87,7 +87,7 @@ class AsciiDBHandler {
 		scanner.close();
 	}
 	
-	public void Dump(){
+	void Dump(){
 		System.out.println("Dump Ascii Database with Name: " + Name);
 		String tableHead = "";
 		for(String column : Columns)
